@@ -1,0 +1,42 @@
+1) Launch EC2 instance as usual (Edit inbound rule and add all traffic rule)
+
+2) sudo -i 
+
+3) sudo apt update -y 
+
+4) sudo apt install docker.io -y  
+
+5) sudo systemctl start docker 
+ 
+6) sudo systemctl enable docker 
+
+7) docker --version 
+
+8) docker pull mariadb 
+ 
+9)
+docker run -d --name mariadb \
+-e MYSQL_ROOT_PASSWORD=rootpassword \
+-e MYSQL_DATABASE=wordpress \
+-e MYSQL_USER=wordpressuser \
+-e MYSQL_PASSWORD=wordpresspassword \
+mariadb
+
+
+10) docker pull wordpress   
+
+11)  
+docker run -d --name wordpress \
+-e WORDPRESS_DB_HOST=mariadb \
+-e WORDPRESS_DB_NAME=wordpress \
+-e WORDPRESS_DB_USER=wordpressuser \
+-e WORDPRESS_DB_PASSWORD=wordpresspassword \
+-p 80:80 \
+--link mariadb:mariadb \
+wordpress
+ 
+
+12) Access WordPress 
+1. Open http://<public-ip> in a browser. 
+2. Complete the setup wizard. 
+
